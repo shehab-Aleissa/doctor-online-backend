@@ -17,12 +17,14 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from api.views import DoctorProfileList, ScheduelList
+from api.views import DoctorProfileList, ScheduelList, MakeFavourite, FavouriteList
 urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('doctor/list', DoctorProfileList.as_view(), name='doctor-list'),
     path('doctor/schedeul', ScheduelList.as_view(), name='doctor-scheduel'),
+    path('make/favourite/', MakeFavourite.as_view(), name='make-favourite'),
+    path('favourite/', FavouriteList.as_view(), name='favourite'),
 
 ]
 

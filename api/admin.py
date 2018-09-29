@@ -5,8 +5,11 @@ from .models import (
     Scheduel
 )
 
+class ScheduelAdmin(admin.ModelAdmin):
+    list_display = ['doctor', 'date', 'time']
+
 admin.site.register(City)
 admin.site.register(DoctorProfile)
-admin.site.register(Scheduel)
+admin.site.register(Scheduel, ScheduelAdmin)
 
 

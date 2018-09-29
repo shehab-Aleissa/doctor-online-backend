@@ -1,11 +1,12 @@
 from rest_framework import serializers
-from .models import DoctorProfile, City, Scheduel
+from .models import DoctorProfile, City, Scheduel, FavouriteDoctor
 from django.contrib.auth.models import User
 
 
 class LogingInSerializer(serializers.ModelSerializer):
     the_username = serializers.CharField(max_length=120)
     the_password = serializers.CharField(write_only=True)
+
 
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -37,32 +38,49 @@ class CitySerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class DoctorProfileSerializer(serializers.ModelSerializer):
-
- 
-    # adding the name not the id in json
-    user = serializers.SerializerMethodField()
-    
-    city = serializers.SerializerMethodField()
-    def get_user(self, obj):
-        return (obj.user.first_name + ' ' + obj.user.last_name)
-    
-    def get_city(self, obj):
-        return obj.city.name
-
-   
-    class Meta:
-        model = DoctorProfile
-        fields = '__all__'
-
 
 
 class ScheduelSerializer(serializers.ModelSerializer):
-    doctor = serializers.SerializerMethodField()
-    
-    def get_doctor(self, obj):
-        return (obj.doctor.first_name + ' ' + obj.doctor.last_name)
+    booked = serializers.SerializerMethodField()
+    patient = UserSerializer()
 
     class Meta:
         model = Scheduel
         fields = '__all__'
+
+    def get_booked(self, obj):
+        return obj.booked()
+
+
+
+class DoctorProfileSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
+    city = CitySerializer()
+    schedule = serializers.SerializerMethodField()
+    
+    class Meta:
+        model = DoctorProfile
+        fields = '__all__'
+
+    def get_schedule(self, obj):
+        schedule = obj.doctor_schedule.all()
+        return ScheduelSerializer(schedule, many=True).data
+
+   
+
+class FavouriteDoctorSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
+    # doctor = DoctorProfileSerializer()
+    doctor_name = serializers.SerializerMethodField()
+
+    class Meta:
+        model = FavouriteDoctor
+        fields = ['user', 'doctor_name']
+
+    def get_doctor_name(self, obj):
+        return obj.doctor.user.get_full_name()
+
+        
+
+
+

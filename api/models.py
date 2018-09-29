@@ -8,8 +8,6 @@ class City(models.Model):
         return self.name
 
 
-
-
 class DoctorProfile(models.Model):
     # user.group_set.all().exist THIS IS FOR FRONT END CHECKING USER IS IN A GROUP
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -34,21 +32,25 @@ class DoctorProfile(models.Model):
 
 
 class Scheduel(models.Model):
-    doctor = models.ForeignKey(User, on_delete=models.CASCADE, related_name='doctor_schedule')
+    doctor = models.ForeignKey(DoctorProfile, on_delete=models.CASCADE, related_name='doctor_schedule')
     date = models.DateField()
     time = models.TimeField()
     patient = models.ForeignKey(User, on_delete=models.CASCADE, related_name='patient_schedule', null=True, blank=True)
 
     def __str__(self):
-        return (self.doctor.first_name + ' ' + self.doctor.last_name)
+        return self.doctor.user.first_name
+    
+    def booked(self):
+        return True if self.patient else False
+            
     # user.doctor_schedule.all()
     # user.patient_schedule.all()
     
 
 
-# class FavouriteDoctor(models.Model):
-#     doctor = models.ForeignKey(DoctorProfile, on_delete=models.CASCADE)
-#     user = models.ForeignKey(User, on_delete=models.CASCADE)
+class FavouriteDoctor(models.Model):
+    doctor = models.ForeignKey(DoctorProfile, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
 # class Rating(models.Model):
