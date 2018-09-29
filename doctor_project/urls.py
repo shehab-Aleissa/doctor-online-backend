@@ -17,11 +17,13 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from api.views import DoctorProfileList
+from api.views import DoctorProfileList, ScheduelList
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    path('doctor/list', DoctorProfileList.as_view(), name='doctor-list')
+    path('doctor/list', DoctorProfileList.as_view(), name='doctor-list'),
+    path('doctor/schedeul', ScheduelList.as_view(), name='doctor-scheduel'),
+
 ]
 
 urlpatterns+=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
