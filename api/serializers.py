@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import DoctorProfile, City, Scheduel, FavouriteDoctor
+from .models import DoctorProfile, City, Scheduel, FavouriteDoctor, Rating
 from django.contrib.auth.models import User
 
 
@@ -11,9 +11,11 @@ class LogingInSerializer(serializers.ModelSerializer):
 
 class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
+    token = serializers.CharField(allow_blank=True, read_only=True)
+
     class Meta:
         model = User
-        fields = ['username', 'password']
+        fields = ['username', 'password', 'token', ]
 
     def create(self, validated_data):
         username = validated_data['username']
@@ -21,6 +23,13 @@ class RegisterSerializer(serializers.ModelSerializer):
         new_user = User(username=username)
         new_user.set_password(password)
         new_user.save()
+        jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
+        jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
+
+        payload = jwt_payload_handler(new_user)
+        token = jwt_encode_handler(payload)
+
+        validated_data["token"] = token
         return validated_data
 
 
@@ -68,9 +77,8 @@ class DoctorProfileSerializer(serializers.ModelSerializer):
 
    
 
-class FavouriteDoctorSerializer(serializers.ModelSerializer):
+class GetFavouriteDoctorSerializer(serializers.ModelSerializer):
     user = UserSerializer()
-    # doctor = DoctorProfileSerializer()
     doctor_name = serializers.SerializerMethodField()
 
     class Meta:
@@ -80,7 +88,28 @@ class FavouriteDoctorSerializer(serializers.ModelSerializer):
     def get_doctor_name(self, obj):
         return obj.doctor.user.get_full_name()
 
-        
+    
+class PostFavouriteDoctorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FavouriteDoctor
+        fields = "__all__"
 
 
 
+class GetRatingSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
+    doctor = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Rating
+        fields = ['user', 'doctor']
+
+    def get_doctor(self, obj):
+        return obj.doctor.user.get_full_name()
+
+
+
+class PostRatingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Rating
+        fields = "__all__"
