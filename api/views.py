@@ -5,7 +5,8 @@ GetFavouriteDoctorSerializer,
 RegisterSerializer,
 PostFavouriteDoctorSerializer,
 GetRatingSerializer,
-PostRatingSerializer)
+PostRatingSerializer,
+CitySerializer)
 
 from rest_framework.response import Response
 from rest_framework.generics import (
@@ -13,7 +14,7 @@ from rest_framework.generics import (
 ) 
 from rest_framework import status
 from rest_framework.views import APIView
-from .models import DoctorProfile, Scheduel, FavouriteDoctor, Rating
+from .models import DoctorProfile, Scheduel, FavouriteDoctor, Rating, City
 # Create your views here.
 
 #REGISTERING
@@ -63,3 +64,7 @@ class RatingList(ListAPIView):
 
     def get_queryset(self):
         queryset = Rating.objects.filter(user= self.request.user)
+
+class CityList(ListAPIView):
+    queryset = City.objects.all()
+    serializer_class = CitySerializer
