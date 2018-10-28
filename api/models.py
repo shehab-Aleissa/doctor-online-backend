@@ -7,10 +7,17 @@ class City(models.Model):
     def __str__(self):
         return self.name
 
+class Speciality(models.Model):
+    name = models.CharField(max_length=120)
+    img = models.ImageField()
+
+    def __str__(self):
+        return self.name
 
 class DoctorProfile(models.Model):
     # user.group_set.all().exist THIS IS FOR FRONT END CHECKING USER IS IN A GROUP
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    speciality = models.ForeignKey(Speciality, on_delete=models.CASCADE)
     img = models.ImageField()
     profession = models.CharField(max_length=120)
     description = models.TextField()
