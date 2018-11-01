@@ -3,7 +3,8 @@ from .models import (
     City,
     DoctorProfile,
     Scheduel,
-    Speciality
+    Speciality,
+    Rating
 )
 
 class ScheduelAdmin(admin.ModelAdmin):
@@ -13,5 +14,7 @@ admin.site.register(City)
 admin.site.register(DoctorProfile)
 admin.site.register(Scheduel, ScheduelAdmin)
 admin.site.register(Speciality)
+admin.site.register(Rating)
+
 
 

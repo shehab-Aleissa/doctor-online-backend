@@ -102,7 +102,7 @@ class GetRatingSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Rating
-        fields = ['user', 'doctor']
+        fields = ['user', 'doctor', 'ratings']
 
     def get_doctor(self, obj):
         return obj.doctor.user.get_full_name()

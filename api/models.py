@@ -64,8 +64,15 @@ class FavouriteDoctor(models.Model):
 class Rating(models.Model):
     doctor = models.ForeignKey(DoctorProfile, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    number = models.IntegerField()
-    # d&&&&&&&&&&&&& HOW TO LET THEM CHCOOSE BETWEEN 0 TO 5 &&&&&&&&&&&&&&
+    RATING_CHOICES = (
+    (1, 'Poor'),
+    (2, 'Average'),
+    (3, 'Good'),
+    (4, 'Very Good'),
+    (5, 'Excellent')
+    )
+
+    ratings = models.IntegerField(choices=RATING_CHOICES, default=1)
 
 
 
