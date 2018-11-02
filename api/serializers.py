@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import DoctorProfile, City, Scheduel, FavouriteDoctor, Rating
+from .models import DoctorProfile, City, Scheduel, FavouriteDoctor, Rating, Speciality
 from django.contrib.auth.models import User
 
 
@@ -46,7 +46,10 @@ class CitySerializer(serializers.ModelSerializer):
         model = City
         fields = '__all__'
 
-
+class SpecialitySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Speciality
+        fields = '__all__'
 
 
 class ScheduelSerializer(serializers.ModelSerializer):
@@ -66,7 +69,7 @@ class DoctorProfileSerializer(serializers.ModelSerializer):
     user = UserSerializer()
     city = CitySerializer()
     schedule = serializers.SerializerMethodField()
-    
+
     class Meta:
         model = DoctorProfile
         fields = '__all__'
@@ -75,7 +78,7 @@ class DoctorProfileSerializer(serializers.ModelSerializer):
         schedule = obj.doctor_schedule.all()
         return ScheduelSerializer(schedule, many=True).data
 
-   
+
 
 class GetFavouriteDoctorSerializer(serializers.ModelSerializer):
     user = UserSerializer()
@@ -88,7 +91,7 @@ class GetFavouriteDoctorSerializer(serializers.ModelSerializer):
     def get_doctor_name(self, obj):
         return obj.doctor.user.get_full_name()
 
-    
+
 class PostFavouriteDoctorSerializer(serializers.ModelSerializer):
     class Meta:
         model = FavouriteDoctor

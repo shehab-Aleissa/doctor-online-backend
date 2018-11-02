@@ -47,13 +47,13 @@ class Scheduel(models.Model):
 
     def __str__(self):
         return self.doctor.user.first_name
-    
+
     def booked(self):
         return True if self.patient else False
-            
+
     # user.doctor_schedule.all()
     # user.patient_schedule.all()
-    
+
 
 
 class FavouriteDoctor(models.Model):

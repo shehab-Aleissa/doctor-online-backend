@@ -5,15 +5,17 @@ GetFavouriteDoctorSerializer,
 RegisterSerializer,
 PostFavouriteDoctorSerializer,
 GetRatingSerializer,
-PostRatingSerializer)
+PostRatingSerializer,
+SpecialitySerializer,
+CitySerializer)
 
 from rest_framework.response import Response
 from rest_framework.generics import (
     ListAPIView, CreateAPIView
-) 
+)
 from rest_framework import status
 from rest_framework.views import APIView
-from .models import DoctorProfile, Scheduel, FavouriteDoctor, Rating
+from .models import DoctorProfile, Scheduel, FavouriteDoctor, Rating, City, Speciality
 # Create your views here.
 
 #REGISTERING
@@ -45,11 +47,11 @@ class MakeFavourite(APIView):
             return Response(status=status.HTTP_200_OK)
 
 
-    
+
 # THIS WILL GET ONLY THE LIST OF THE DOCTORS THAT HAVE BEEN FAVOURITE BY THE LOGGED IN USER
 class FavouriteList(ListAPIView):
     serializer_class = GetFavouriteDoctorSerializer
-    
+
     def get_queryset(self):
         queryset = FavouriteDoctor.objects.filter(user=self.request.user)
         return queryset
@@ -63,3 +65,12 @@ class RatingList(ListAPIView):
 
     def get_queryset(self):
         queryset = Rating.objects.filter(user= self.request.user)
+        return queryset
+
+class CityList(ListAPIView):
+    queryset = City.objects.all()
+    serializer_class = CitySerializer
+
+class SpecialityList(ListAPIView):
+    queryset = Speciality.objects.all()
+    serializer_class = SpecialitySerializer
