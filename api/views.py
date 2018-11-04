@@ -6,7 +6,9 @@ RegisterSerializer,
 PostFavouriteDoctorSerializer,
 GetRatingSerializer,
 PostRatingSerializer,
-CitySerializer)
+CitySerializer,
+SpecialitySerializer,
+AreaSerializer)
 
 from rest_framework.response import Response
 from rest_framework.generics import (
@@ -14,7 +16,7 @@ from rest_framework.generics import (
 ) 
 from rest_framework import status
 from rest_framework.views import APIView
-from .models import DoctorProfile, Scheduel, FavouriteDoctor, Rating, City
+from .models import DoctorProfile, Scheduel, FavouriteDoctor, Rating, City, Speciality, Area
 # Create your views here.
 
 #REGISTERING
@@ -68,3 +70,11 @@ class RatingList(ListAPIView):
 class CityList(ListAPIView):
     queryset = City.objects.all()
     serializer_class = CitySerializer
+
+class AreaList(ListAPIView):
+    queryset = Area.objects.all()
+    serializer_class = AreaSerializer
+    
+class SpecialityList(ListAPIView):
+    queryset = Speciality.objects.all()
+    serializer_class = SpecialitySerializer

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import DoctorProfile, City, Scheduel, FavouriteDoctor, Rating
+from .models import DoctorProfile, City, Scheduel, FavouriteDoctor, Rating, Speciality, Area
 from django.contrib.auth.models import User
 
 
@@ -46,6 +46,11 @@ class CitySerializer(serializers.ModelSerializer):
         model = City
         fields = '__all__'
 
+
+class AreaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Area
+        fields = "__all__"
 
 
 
@@ -112,4 +117,9 @@ class GetRatingSerializer(serializers.ModelSerializer):
 class PostRatingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Rating
+        fields = "__all__"
+
+class SpecialitySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Speciality
         fields = "__all__"
