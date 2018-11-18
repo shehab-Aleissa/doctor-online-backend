@@ -42,6 +42,7 @@ class DoctorProfile(models.Model):
     street = models.CharField(max_length=255)
     building = models.IntegerField(blank=True, null=True)
     floor = models.IntegerField(blank=True, null=True)
+    is_doctor = models.BooleanField(default=False)
 
     def __str__(self):
         return (self.user.first_name + ' ' + self.user.last_name)

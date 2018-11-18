@@ -9,7 +9,9 @@ PostRatingSerializer,
 CitySerializer,
 SpecialitySerializer,
 AreaSerializer)
-
+from django.contrib.auth import models
+from django.contrib.auth.models import Group
+from django.contrib.auth.models import User
 from rest_framework.response import Response
 from rest_framework.generics import (
     ListAPIView, CreateAPIView
@@ -25,8 +27,9 @@ class RegisterAPIView(CreateAPIView):
 
 
 class DoctorProfileList(ListAPIView):
-    queryset = DoctorProfile.objects.all()
+    queryset = DoctorProfile.objects.filter(is_doctor= True)
     serializer_class = DoctorProfileSerializer
+ 
 
 class ScheduelList(ListAPIView):
     queryset = Scheduel.objects.all()
@@ -60,6 +63,8 @@ class FavouriteList(ListAPIView):
 class MakeRating(CreateAPIView):
     queryset = Rating.objects.all()
     serializer_class = PostRatingSerializer
+
+
 # THIS WILL GET ONLY THE LIST OF THE DOCTORS THAT HAVE BEEN RATED BY THE LOGGED IN USER
 class RatingList(ListAPIView):
     serializer_class = GetRatingSerializer
