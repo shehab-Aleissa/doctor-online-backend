@@ -2,10 +2,21 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class City(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, unique=True)
+
 
     def __str__(self):
         return self.name
+
+class Area(models.Model):
+    name = models.CharField(max_length=255, unique=True)
+    city = models.ForeignKey(City, on_delete=models.CASCADE)
+
+
+    def __str__(self):
+        return self.name
+
+
 
 class Speciality(models.Model):
     name = models.CharField(max_length=120)
@@ -26,7 +37,7 @@ class DoctorProfile(models.Model):
     service = models.TextField()
     fees = models.IntegerField(blank=True, null=True)
     opening_file = models.IntegerField(blank=True, null=True)
-    city = models.ForeignKey(City, on_delete=models.CASCADE)
+    area = models.ForeignKey(Area, on_delete=models.CASCADE)
     block = models.IntegerField()
     street = models.CharField(max_length=255)
     building = models.IntegerField(blank=True, null=True)

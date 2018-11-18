@@ -1,7 +1,7 @@
 from rest_framework import serializers
-from .models import DoctorProfile, City, Scheduel, FavouriteDoctor, Rating, Speciality
+from .models import DoctorProfile, City, Scheduel, FavouriteDoctor, Rating, Speciality, Area
 from django.contrib.auth.models import User
-
+from rest_framework_jwt.settings import api_settings
 
 class LogingInSerializer(serializers.ModelSerializer):
     the_username = serializers.CharField(max_length=120)
@@ -46,10 +46,12 @@ class CitySerializer(serializers.ModelSerializer):
         model = City
         fields = '__all__'
 
-class SpecialitySerializer(serializers.ModelSerializer):
+
+class AreaSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Speciality
-        fields = '__all__'
+        model = Area
+        fields = "__all__"
+
 
 
 class ScheduelSerializer(serializers.ModelSerializer):
@@ -63,12 +65,16 @@ class ScheduelSerializer(serializers.ModelSerializer):
     def get_booked(self, obj):
         return obj.booked()
 
-
+class PostRatingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Rating
+        fields = "__all__"
 
 class DoctorProfileSerializer(serializers.ModelSerializer):
     user = UserSerializer()
-    city = CitySerializer()
+    area = AreaSerializer()
     schedule = serializers.SerializerMethodField()
+    rating_set = PostRatingSerializer(many=True)
 
     class Meta:
         model = DoctorProfile
@@ -112,7 +118,7 @@ class GetRatingSerializer(serializers.ModelSerializer):
 
 
 
-class PostRatingSerializer(serializers.ModelSerializer):
+class SpecialitySerializer(serializers.ModelSerializer):
     class Meta:
-        model = Rating
+        model = Speciality
         fields = "__all__"

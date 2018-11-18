@@ -25,8 +25,9 @@ FavouriteList,
 RegisterAPIView,
 MakeRating,
 RatingList,
+CityList,
 SpecialityList,
-CityList)
+AreaList)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -43,8 +44,11 @@ urlpatterns = [
     path('rating/', RatingList.as_view(), name='rating'),
     path('make/rating/', MakeRating.as_view(), name='make-rating'),
 
-    path('cities/', CityList.as_view(), name='cities'),
-    path('Speciality/', SpecialityList.as_view(), name='Speciality'),
+    path('cities/', CityList.as_view(), name='citites'),
+    path('area/', AreaList.as_view(), name='area'),
+
+    path('speciality/', SpecialityList.as_view(), name='speciality')
+
 ]
 
 urlpatterns+=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
