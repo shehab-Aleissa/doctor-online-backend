@@ -30,6 +30,7 @@ class DoctorProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     speciality = models.ForeignKey(Speciality, on_delete=models.CASCADE)
     img = models.ImageField()
+    viewers = models.PositiveIntegerField(default=0)
     profession = models.CharField(max_length=120)
     description = models.TextField()
     google_maps = models.URLField(max_length=450)

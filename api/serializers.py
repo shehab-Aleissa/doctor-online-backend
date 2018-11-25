@@ -84,7 +84,10 @@ class DoctorProfileSerializer(serializers.ModelSerializer):
         schedule = obj.doctor_schedule.all()
         return ScheduelSerializer(schedule, many=True).data
 
-
+class UpdateProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DoctorProfile
+        exclude = ('img', )
 
 class GetFavouriteDoctorSerializer(serializers.ModelSerializer):
     user = UserSerializer()

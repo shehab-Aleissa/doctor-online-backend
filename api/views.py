@@ -7,6 +7,7 @@ PostFavouriteDoctorSerializer,
 GetRatingSerializer,
 PostRatingSerializer,
 CitySerializer,
+UpdateProfileSerializer,
 SpecialitySerializer,
 AreaSerializer)
 from django.contrib.auth import models
@@ -14,8 +15,10 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.models import User
 from rest_framework.response import Response
 from rest_framework.generics import (
-    ListAPIView, CreateAPIView
+    ListAPIView, CreateAPIView, RetrieveUpdateAPIView
 )
+
+from rest_framework import permissions
 from rest_framework import status
 from rest_framework.views import APIView
 from .models import DoctorProfile, Scheduel, FavouriteDoctor, Rating, City, Speciality, Area
@@ -29,7 +32,21 @@ class RegisterAPIView(CreateAPIView):
 class DoctorProfileList(ListAPIView):
     queryset = DoctorProfile.objects.filter(is_doctor= True)
     serializer_class = DoctorProfileSerializer
- 
+
+class UpdateView(RetrieveUpdateAPIView):
+    queryset = DoctorProfile.objects.all()
+    serializer_class = UpdateProfileSerializer
+    lookup_field = 'id'
+    lookup_url_kwarg = 'profile_id'
+
+class ViewsCount(APIView):
+    permission_classes = (permissions.AllowAny,)
+    def post(self, request, doctor_id, format=None):
+        doctor = DoctorProfile.objects.get(id=doctor_id)
+        doctor.viewers += 1
+        doctor.save()
+        return Response(doctor.viewers)
+
 
 class ScheduelList(ListAPIView):
     queryset = Scheduel.objects.all()

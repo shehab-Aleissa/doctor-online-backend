@@ -21,12 +21,14 @@ from rest_framework_jwt.views import obtain_jwt_token
 from api.views import (DoctorProfileList,
 ScheduelList,
 MakeFavourite,
+ViewsCount,
 FavouriteList,
 RegisterAPIView,
 MakeRating,
 RatingList,
 CityList,
 SpecialityList,
+UpdateView,
 AreaList)
 
 urlpatterns = [
@@ -47,7 +49,10 @@ urlpatterns = [
     path('cities/', CityList.as_view(), name='citites'),
     path('area/', AreaList.as_view(), name='area'),
 
-    path('speciality/', SpecialityList.as_view(), name='speciality')
+    path('speciality/', SpecialityList.as_view(), name='speciality'),
+    path('doctor/views/<int:profile_id>', ViewsCount.as_view(), name='doctor-views'),
+    path('update/profile/<int:profile_id>', UpdateView.as_view(), name='update-profile'),
+
 
 ]
 
