@@ -87,7 +87,7 @@ class DoctorProfileSerializer(serializers.ModelSerializer):
 class UpdateProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = DoctorProfile
-        exclude = ('img', )
+        exclude = ('img', "viewers", "profession", "is_doctor", "user", "speciality", "area")
 
 class GetFavouriteDoctorSerializer(serializers.ModelSerializer):
     user = UserSerializer()

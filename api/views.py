@@ -35,14 +35,15 @@ class DoctorProfileList(ListAPIView):
 
 class UpdateView(RetrieveUpdateAPIView):
     queryset = DoctorProfile.objects.all()
+    permission_classes = (permissions.AllowAny,)
     serializer_class = UpdateProfileSerializer
     lookup_field = 'id'
     lookup_url_kwarg = 'profile_id'
 
 class ViewsCount(APIView):
     permission_classes = (permissions.AllowAny,)
-    def post(self, request, doctor_id, format=None):
-        doctor = DoctorProfile.objects.get(id=doctor_id)
+    def post(self, request, profile_id, format=None):
+        doctor = DoctorProfile.objects.get(id=profile_id)
         doctor.viewers += 1
         doctor.save()
         return Response(doctor.viewers)
