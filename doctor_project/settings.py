@@ -25,9 +25,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'ahhv$s752ehe4fzcg=-0%6$+=*rasrsrh*e@hz&k7q4je3ad@-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['207.154.246.97']
 
 
 # Application definition
@@ -80,8 +80,12 @@ WSGI_APPLICATION = 'doctor_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'django',
+        'USER': 'django',
+        'PASSWORD': 'dcfd46507156605eac28c3a58d557ddd',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
@@ -92,7 +96,7 @@ REST_FRAMEWORK = {
 }
 # CHAAAAAAAAAAAAAAAANNNNNNNNNGE ITTTTTTTTTTTTTT THE HOURS
 JWT_AUTH = {
-    'JWT_EXPIRATION_DELTA': datetime.timedelta(hours=48),
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(hours=5000),
 }
 
 # Password validation

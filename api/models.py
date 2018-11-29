@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class City(models.Model):
-    name = models.CharField(max_length=255, unique=True)
+    name = models.CharField(max_length=255, unique=True, default='city')
 
 
     def __str__(self):
