@@ -6,9 +6,9 @@ RegisterSerializer,
 PostFavouriteDoctorSerializer,
 GetRatingSerializer,
 PostRatingSerializer,
-CitySerializer,
 UpdateProfileSerializer,
 SpecialitySerializer,
+CitySerializer,
 AreaSerializer)
 from django.contrib.auth import models
 from django.contrib.auth.models import Group
@@ -21,7 +21,7 @@ from rest_framework.generics import (
 from rest_framework import permissions
 from rest_framework import status
 from rest_framework.views import APIView
-from .models import DoctorProfile, Scheduel, FavouriteDoctor, Rating, City, Speciality, Area
+from .models import DoctorProfile, Scheduel, FavouriteDoctor, Rating, Speciality, Area, City
 # Create your views here.
 
 #REGISTERING
@@ -94,8 +94,7 @@ class RatingList(ListAPIView):
 class CityList(ListAPIView):
     queryset = City.objects.all()
     serializer_class = CitySerializer
-    for i in City.objects.order_by("name"):
-        print (i);
+    
 
 
 class AreaList(ListAPIView):

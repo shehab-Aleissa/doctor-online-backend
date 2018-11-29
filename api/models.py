@@ -26,7 +26,7 @@ class Speciality(models.Model):
         return self.name
 
 class DoctorProfile(models.Model):
-    # user.group_set.all().exist THIS IS FOR FRONT END CHECKING USER IS IN A GROUP
+   
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     speciality = models.ForeignKey(Speciality, on_delete=models.CASCADE)
     img = models.ImageField()

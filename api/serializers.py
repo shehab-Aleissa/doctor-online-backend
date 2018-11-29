@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import DoctorProfile, City, Scheduel, FavouriteDoctor, Rating, Speciality, Area
+from .models import DoctorProfile, Scheduel, FavouriteDoctor, Rating, Speciality, Area, City
 from django.contrib.auth.models import User
 from rest_framework_jwt.settings import api_settings
 
