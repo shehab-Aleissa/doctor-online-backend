@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import DoctorProfile, Scheduel, FavouriteDoctor, Rating, Speciality, Area, City
+from .models import DoctorProfile, Scheduel, FavouriteDoctor, Rating, Speciality, Area, City, UserProfile
 from django.contrib.auth.models import User
 from rest_framework_jwt.settings import api_settings
 
@@ -12,16 +12,19 @@ class LogingInSerializer(serializers.ModelSerializer):
 class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
     token = serializers.CharField(allow_blank=True, read_only=True)
-
+    phone_number = serializers.IntegerField()
     class Meta:
         model = User
-        fields = ['username', 'password', 'token', 'email', 'first_name', 'last_name']
+        fields = ['username', 'password', 'token', 'email', 'first_name', 'last_name', 'phone_number']
         # fields = '__all__'
 
     def create(self, validated_data):
         username = validated_data['username']
         password = validated_data['password']
-        new_user = User(username=username)
+        first_name = validated_data['first_name']
+        last_name = validated_data['last_name']
+        email = validated_data['email']
+        new_user = User(username=username, email=email, first_name=first_name, last_name=last_name,)
         new_user.set_password(password)
         new_user.save()
         jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
@@ -38,9 +41,22 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['username', 'first_name', 'last_name', 'email',]
+        # fields = '__all__'
 
+class UserProfileSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
+    class Meta:
+        model = UserProfile
+        fields = '__all__'
 
-
+class UpdateUserProfileSerializer(serializers.ModelSerializer):
+    profile = UserProfileSerializer
+    class Meta:
+        model = UserProfile
+        fields = '__all__'
+        # exclude = ('username',)
+ 
+        
 
 class CitySerializer(serializers.ModelSerializer):
     class Meta:
@@ -85,7 +101,7 @@ class DoctorProfileSerializer(serializers.ModelSerializer):
         schedule = obj.doctor_schedule.all()
         return ScheduelSerializer(schedule, many=True).data
 
-class UpdateProfileSerializer(serializers.ModelSerializer):
+class UpdateDoctorProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = DoctorProfile
         exclude = ('img', "viewers", "profession", "is_doctor", "user", "speciality", "area")

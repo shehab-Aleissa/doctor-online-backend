@@ -29,13 +29,25 @@ RatingList,
 CityList,
 SpecialityList,
 UpdateView,
-AreaList)
+AreaList,
+UserList,
+UserProfileCreateView,
+UpdateUserProfile,
+UserProfileList,
+# UpdateUserProfile
+)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('login/', obtain_jwt_token, name='login'),
     path('register/', RegisterAPIView.as_view(), name='register'),
+
+    path('users/', UserList.as_view(), name='users-list'),
+    path('profile/info/<int:user_id>', UpdateUserProfile.as_view(), name='user-info'),
+    path('users/profiles', UserProfileList.as_view(), name='users-profiles'),
+    # path('user/profile/<int:profile_id>', UpdateUserProfile.as_view(), name='user-profile'),
 
     path('doctor/list', DoctorProfileList.as_view(), name='doctor-list'),
     path('doctor/schedeul', ScheduelList.as_view(), name='doctor-scheduel'),
