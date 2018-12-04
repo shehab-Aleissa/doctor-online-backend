@@ -37,19 +37,19 @@ class DoctorProfileList(ListAPIView):
     queryset = DoctorProfile.objects.filter(is_doctor= True)
     serializer_class = DoctorProfileSerializer
 
-class UserProfileCreateView(APIView):
+# class UserProfileCreateView(APIView):
 
-    def post(self,request):
+#     def post(self,request):
         
-        phone_number = request.data["phone_number"]
+#         phone_number = request.data["phone_number"]
        
-        # pic = request.FILES["pic"]
-        profile = UserProfile(phone_number=phone_number)
-        profile.save()
+#         # pic = request.FILES["pic"]
+#         profile = UserProfile(phone_number=phone_number)
+#         profile.save()
 
-        user = User.objects.get(id=user.id)
-        serializer = UserProfileSerializer(user, context={'request':request})
-        return Response(serializer.data)
+#         user = User.objects.get(id=user.id)
+#         serializer = UserProfileSerializer(user, context={'request':request})
+#         return Response(serializer.data)
 
 class UpdateView(RetrieveUpdateAPIView):
     queryset = DoctorProfile.objects.all()

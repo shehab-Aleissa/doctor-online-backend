@@ -31,7 +31,7 @@ SpecialityList,
 UpdateView,
 AreaList,
 UserList,
-UserProfileCreateView,
+# UserProfileCreateView,
 UpdateUserProfile,
 UserProfileList,
 # UpdateUserProfile
@@ -45,7 +45,7 @@ urlpatterns = [
     path('register/', RegisterAPIView.as_view(), name='register'),
 
     path('users/', UserList.as_view(), name='users-list'),
-    path('profile/info/<int:user_id>', UpdateUserProfile.as_view(), name='user-info'),
+    path('profile/info/get&update/<int:user_id>', UpdateUserProfile.as_view(), name='user-info'),
     path('users/profiles', UserProfileList.as_view(), name='users-profiles'),
     # path('user/profile/<int:profile_id>', UpdateUserProfile.as_view(), name='user-profile'),
 

@@ -12,10 +12,9 @@ class LogingInSerializer(serializers.ModelSerializer):
 class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
     token = serializers.CharField(allow_blank=True, read_only=True)
-    phone_number = serializers.IntegerField()
     class Meta:
         model = User
-        fields = ['username', 'password', 'token', 'email', 'first_name', 'last_name', 'phone_number']
+        fields = ['username', 'password', 'token', 'email', 'first_name', 'last_name']
         # fields = '__all__'
 
     def create(self, validated_data):
@@ -50,7 +49,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class UpdateUserProfileSerializer(serializers.ModelSerializer):
-    profile = UserProfileSerializer
+    # profile = UserProfileSerializer()
     class Meta:
         model = UserProfile
         fields = '__all__'
