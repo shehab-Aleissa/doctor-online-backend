@@ -30,7 +30,7 @@ class Speciality(models.Model):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    phone_number = models.IntegerField(null=True)
+    phone_number = models.IntegerField(default=0)
 
     def __str__(self):
         return self.user.username
