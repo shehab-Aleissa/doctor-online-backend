@@ -27,7 +27,9 @@ SECRET_KEY = 'ahhv$s752ehe4fzcg=-0%6$+=*rasrsrh*e@hz&k7q4je3ad@-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['207.154.246.97', '127.0.0.1', '192.168.1.35']
+# ALLOWED_HOSTS = ['207.154.246.97', '127.0.0.1', '192.168.1.35']
+ALLOWED_HOSTS = []
+
 # 
 # Application definition
 
@@ -77,22 +79,22 @@ WSGI_APPLICATION = 'doctor_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'django',
-        'USER': 'django',
-        'PASSWORD': 'dcfd46507156605eac28c3a58d557ddd',
-        'HOST': 'localhost',
-        'PORT': '',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'django',
+#         'USER': 'django',
+#         'PASSWORD': 'dcfd46507156605eac28c3a58d557ddd',
+#         'HOST': 'localhost',
+#         'PORT': '',
+#     }
+# }
 
 
 REST_FRAMEWORK = {
