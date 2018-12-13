@@ -116,6 +116,10 @@ class MakeRating(CreateAPIView):
     queryset = Rating.objects.all()
     serializer_class = PostRatingSerializer
 
+class CreateScheduel(CreateAPIView):
+    queryset = Scheduel.objects.all()
+    serializer_class = UpdateSchudelSerializer
+
 
 # THIS WILL GET ONLY THE LIST OF THE DOCTORS THAT HAVE BEEN RATED BY THE LOGGED IN USER
 class RatingList(ListAPIView):
