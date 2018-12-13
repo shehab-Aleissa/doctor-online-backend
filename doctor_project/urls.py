@@ -31,6 +31,7 @@ SpecialityList,
 UpdateView,
 AreaList,
 UserList,
+UpdateSchudel,
 # UserProfileCreateView,
 UpdateUserProfile,
 UserProfileList,
@@ -51,6 +52,7 @@ urlpatterns = [
 
     path('doctor/list', DoctorProfileList.as_view(), name='doctor-list'),
     path('doctor/schedeul', ScheduelList.as_view(), name='doctor-scheduel'),
+    path('update/schedeul/<int:user_id>', UpdateSchudel.as_view(), name='update-scheduel'),
 
     path('make/favourite/<int:doctor_id>', MakeFavourite.as_view(), name='make-favourite'),
     path('favourite/', FavouriteList.as_view(), name='favourite'),

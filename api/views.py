@@ -13,6 +13,7 @@ UserSerializer,
 UpdateUserProfileSerializer,
 # UpdateProfileSerializer,
 UpdateDoctorProfileSerializer,
+UpdateSchudelSerializer,
 UserProfileSerializer)
 from django.contrib.auth import models
 from django.contrib.auth.models import Group
@@ -66,6 +67,12 @@ class UpdateUserProfile(RetrieveUpdateAPIView):
     lookup_field = 'id'
     lookup_url_kwarg = 'user_id'
 
+class UpdateSchudel(RetrieveUpdateAPIView):
+    queryset = Scheduel.objects.all()
+    permission_classes = (permissions.AllowAny,)
+    serializer_class = UpdateSchudelSerializer
+    lookup_field = 'id'
+    lookup_url_kwarg = 'user_id'
 
 class ViewsCount(APIView):
     permission_classes = (permissions.AllowAny,)

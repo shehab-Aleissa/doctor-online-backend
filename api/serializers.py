@@ -105,6 +105,11 @@ class UpdateDoctorProfileSerializer(serializers.ModelSerializer):
         model = DoctorProfile
         exclude = ('img', "viewers", "profession", "is_doctor", "user", "speciality", "area")
 
+class UpdateSchudelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Scheduel
+        fields = '__all__'
+
 class GetFavouriteDoctorSerializer(serializers.ModelSerializer):
     user = UserSerializer()
     doctor_name = serializers.SerializerMethodField()
