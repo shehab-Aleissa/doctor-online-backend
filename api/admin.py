@@ -14,7 +14,7 @@ from .models import (
 )
 
 class ScheduelAdmin(admin.ModelAdmin):
-    list_display = ['doctor', 'date', '_from', 'to']
+    list_display = ['doctor', 'date']
 
 class ProfileInline(admin.StackedInline):
     model = UserProfile

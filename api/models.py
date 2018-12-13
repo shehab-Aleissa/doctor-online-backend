@@ -72,8 +72,7 @@ class DoctorProfile(models.Model):
 class Scheduel(models.Model):
     doctor = models.ForeignKey(DoctorProfile, on_delete=models.CASCADE, related_name='doctor_schedule')
     date = models.DateField()
-    _from = models.TimeField()
-    to = models.TimeField()
+    available_time = models.CharField(max_length=120)
     patient = models.ForeignKey(User, on_delete=models.CASCADE, related_name='patient_schedule', null=True, blank=True)
 
     def __str__(self):
