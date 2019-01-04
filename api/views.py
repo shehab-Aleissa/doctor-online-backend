@@ -22,7 +22,7 @@ from rest_framework.response import Response
 from rest_framework.generics import (
     ListAPIView, CreateAPIView, RetrieveUpdateAPIView
 )
-
+from django.shortcuts import get_object_or_404
 from rest_framework import permissions
 from rest_framework import status
 from rest_framework.views import APIView
@@ -73,6 +73,11 @@ class UpdateSchudel(RetrieveUpdateAPIView):
     serializer_class = UpdateSchudelSerializer
     lookup_field = 'id'
     lookup_url_kwarg = 'user_id'
+
+    def delete(self, request, user_id):
+    	todo = get_object_or_404(Scheduel, id=user_id);
+    	todo.delete()
+    	return Response(status=status.HTTP_204_NO_CONTENT)
 
 class ViewsCount(APIView):
     permission_classes = (permissions.AllowAny,)
