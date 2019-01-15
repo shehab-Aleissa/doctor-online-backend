@@ -102,7 +102,6 @@ REST_FRAMEWORK = {
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
     ),
 }
-# CHAAAAAAAAAAAAAAAANNNNNNNNNGE ITTTTTTTTTTTTTT THE HOURS
 JWT_AUTH = {
     'JWT_EXPIRATION_DELTA': datetime.timedelta(hours=5000),
 }
