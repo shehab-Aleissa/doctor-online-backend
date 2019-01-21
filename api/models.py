@@ -31,7 +31,8 @@ class Speciality(models.Model):
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     phone_number = models.IntegerField(default=0)
-
+    token = models.CharField(max_length=150)
+    
     def __str__(self):
         return self.user.username
 

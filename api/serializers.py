@@ -23,7 +23,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         first_name = validated_data['first_name']
         last_name = validated_data['last_name']
         email = validated_data['email']
-        new_user = User(username=username, email=email, first_name=first_name, last_name=last_name,)
+        new_user = User(username=username, email=email, first_name=first_name, last_name=last_name)
         new_user.set_password(password)
         new_user.save()
         jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
@@ -39,7 +39,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name', 'email',]
+        fields = ['username', 'first_name', 'last_name', 'email']
         # fields = '__all__'
 
 class UserProfileSerializer(serializers.ModelSerializer):

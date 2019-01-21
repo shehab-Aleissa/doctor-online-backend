@@ -27,7 +27,7 @@ SECRET_KEY = 'ahhv$s752ehe4fzcg=-0%6$+=*rasrsrh*e@hz&k7q4je3ad@-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['207.154.246.97', '127.0.0.1', '192.168.1.35']
+ALLOWED_HOSTS = ['207.154.246.97', '127.0.0.1', '192.168.1.35','192.168.5.142']
 # ALLOWED_HOSTS = []
 
 # 
@@ -41,8 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'api',
-    'rest_framework'
-
+    'rest_framework',
+    'webpush'
 ]
 
 MIDDLEWARE = [
@@ -88,11 +88,11 @@ WSGI_APPLICATION = 'doctor_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'django',
-        'USER': 'django',
-        'PASSWORD': 'dcfd46507156605eac28c3a58d557ddd',
-        'HOST': 'localhost',
-        'PORT': '',
+        'NAME': 'doctor',
+        'USER': 'postgres',
+        'PASSWORD': '123',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 
@@ -125,6 +125,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+WEBPUSH_SETTINGS = {
+   "VAPID_PUBLIC_KEY": "BAWLThOQZpp7VEQqQu-GUGcn_msmDHmCdBxxI4-vjC-C79eHnK31rFmJlPhJhV4KLsenbNMbJNRniCJZFINUQGI",
+   "VAPID_PRIVATE_KEY": "w578YFV7nQ4XgBjvU6FR33lb_VOErGhkaD_CL7TN1AA",
+   "VAPID_ADMIN_EMAIL": "jonybalsony@outlook.com"
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
