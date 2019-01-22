@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'api',
     'rest_framework',
-    'webpush'
+    # 'webpush'
 ]
 
 MIDDLEWARE = [
@@ -134,11 +134,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-WEBPUSH_SETTINGS = {
-   "VAPID_PUBLIC_KEY": "BAWLThOQZpp7VEQqQu-GUGcn_msmDHmCdBxxI4-vjC-C79eHnK31rFmJlPhJhV4KLsenbNMbJNRniCJZFINUQGI",
-   "VAPID_PRIVATE_KEY": "w578YFV7nQ4XgBjvU6FR33lb_VOErGhkaD_CL7TN1AA",
-   "VAPID_ADMIN_EMAIL": "jonybalsony@outlook.com"
-}
+# WEBPUSH_SETTINGS = {
+#    "VAPID_PUBLIC_KEY": "BAWLThOQZpp7VEQqQu-GUGcn_msmDHmCdBxxI4-vjC-C79eHnK31rFmJlPhJhV4KLsenbNMbJNRniCJZFINUQGI",
+#    "VAPID_PRIVATE_KEY": "w578YFV7nQ4XgBjvU6FR33lb_VOErGhkaD_CL7TN1AA",
+#    "VAPID_ADMIN_EMAIL": "jonybalsony@outlook.com"
+# }
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
